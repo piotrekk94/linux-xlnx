@@ -35,9 +35,25 @@
 };
 
 &amba {
+	axi_dma_0: axidma@0x40400000 {
+		compatible = "xlnx,axi-dma-1.00.a";
+		#dma-cells = <1>;
+		reg = <0x40400000 0x1000>;
+		xlnx,addrwidth = <32>;
+		dma-ranges = <0x00000000 0x00000000 0x20000000>;
+		clocks = <&clkc 15>;
+		clock-names = "s_axi_lite_aclk";
+		dma-channel@40400000 {
+			compatible = "xlnx,axi-dma-s2mm-channel";
+			interrupts = <0 29 4>;
+			xlnx,datawidth = <64>;
+		};	
+	};
 	rng_tester0: rng_test@0x43c00000 {
 		compatible = "rng-test";
 		reg = <0x43c00000 0x1000>;
+		dmas = <&axi_dma_0 0>;
+		dma-names = "axidma";
 	};
 };
 
