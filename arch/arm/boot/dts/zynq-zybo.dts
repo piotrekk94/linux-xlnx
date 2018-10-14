@@ -34,6 +34,13 @@
 	};
 };
 
+&amba {
+	rng_tester0: rng_test@0x43c00000 {
+		compatible = "rng-test";
+		reg = <0x43c00000 0x1000>;
+	};
+};
+
 &clkc {
 	ps-clk-frequency = <50000000>;
 };
